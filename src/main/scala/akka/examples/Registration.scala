@@ -47,7 +47,7 @@ class Storage extends Actor{
 
   override def receive: PartialFunction[Any, Unit] = {
     case AddUser(user) =>
-      println(s"Storage: $user added")
+      println(s"Storage: $user has been added")
       users += user
     case _ => println("default request")
   }
@@ -70,6 +70,7 @@ class Checker extends Actor{
 }
 
 class Recorder(checker: ActorRef, storage: ActorRef) extends Actor{
+
   import scala.concurrent.ExecutionContext.Implicits.global
 
   implicit val timeout: Timeout = Timeout(5 seconds)
@@ -77,7 +78,7 @@ class Recorder(checker: ActorRef, storage: ActorRef) extends Actor{
   override def receive: PartialFunction[Any, Unit] = {
     case NewUser(user) =>
       checker ? CheckUser(user) map{
-        case WhiteUser(`user`) => println(s"user... $user")
+        case WhiteUser(`user`) =>
           storage ! AddUser(user)
         case BlackUser(`user`) =>
           println(s"Recorder: $user is in the blacllist")
@@ -101,6 +102,9 @@ object Registration extends App{
 
   //send NewUser message to recorder
   recorder ! Recorder.NewUser(User("Mahesh", "mahesh.kndpl@gmail.com"))
+
+  //wait so that user can be added to storage
+  Thread.sleep(5000)
 
   //shutdown the system
   system.terminate()
