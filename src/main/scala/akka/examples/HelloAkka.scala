@@ -1,4 +1,4 @@
-package akka
+package akka.examples
 
 import akka.actor.{Actor, ActorRef, ActorSystem, Props}
 
