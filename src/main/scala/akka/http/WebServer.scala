@@ -1,9 +1,10 @@
+/*
 package akka.http
 
+import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.model._
 import akka.http.scaladsl.server.Directives._
-import akka.actor.ActorSystem
 import akka.stream.ActorMaterializer
 
 import scala.concurrent.ExecutionContextExecutor
@@ -31,4 +32,32 @@ object WebServer extends App {
   bindingFuture
     .flatMap(_.unbind())
     .onComplete(_ => system.terminate())
+}
+*/
+
+
+import scala.concurrent.Future
+import scala.concurrent.ExecutionContext
+import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.duration._
+import scala.concurrent.Await
+import scala.util.{Failure, Success}
+
+object FuturesExample extends App {
+
+    val f = Future {
+      // Doing some job
+    }
+
+    val f1 = Future {
+      // Doing some job
+    }
+
+    f.onComplete {
+      case Success(value) => println(">>>>>>>>>>>>>>>>>>>>>>>>>>Done")
+      case Failure(e) =>
+        println("==========================================")
+        e.printStackTrace
+    }
+
 }
