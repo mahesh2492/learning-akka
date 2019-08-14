@@ -7,15 +7,16 @@ case class WhoToGreet(who: String)
 
 //define greet actor
 
-class Greeter extends Actor{
+class Greeter extends Actor {
 
   def receive: PartialFunction[Any, Unit] = {
     case WhoToGreet(who) => println(s"Hello $who")
   }
 }
-object HelloAkka extends App{
 
- //create the  actor system
+object HelloAkka extends App {
+
+  //create the  actor system
   val system = ActorSystem("Hello-Akka")
 
   //create the greet actor
