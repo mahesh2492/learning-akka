@@ -21,6 +21,10 @@ object GraceFullStopTest extends App {
   val graceFullStopActor = system.actorOf(Props[GraceFullStopActor], name = "GraceFullStopTest")
 
   graceFullStopActor ! "Going to kill you"
+  /*
+  If the order in which actors are terminated is important, using gracefulStop can be a
+  good way to attempt to terminate them in a desired order.
+   */
   try {
     val stopped = gracefulStop(graceFullStopActor, 2 seconds)
     Await.result(stopped, 3 seconds)
@@ -30,4 +34,5 @@ object GraceFullStopTest extends App {
   } finally {
     system.terminate()
   }
+
 }
