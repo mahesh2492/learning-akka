@@ -6,6 +6,7 @@ class ChildActor extends Actor {
   override def receive: Receive = {
     case _ => println("Child has received a message")
   }
+
   override def postStop: Unit = println("ChildActor::postStop called")
 }
 
@@ -15,8 +16,8 @@ class ParentWatch extends Actor {
   context.watch(child)
 
   override def receive: PartialFunction[Any, Unit] = {
-    case Terminated(_) => println("OMG! They have killed the child")
-    case message: String   => println(s"Message has been received: $message")
+    case Terminated(_)   => println("OMG! They have killed the child")
+    case message: String => println(s"Message has been received: $message")
   }
 }
 
