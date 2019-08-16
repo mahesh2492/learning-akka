@@ -1,4 +1,3 @@
-/*
 package akka.http
 
 import akka.actor.ActorSystem
@@ -18,10 +17,10 @@ object WebServer extends App {
   implicit val executionContext: ExecutionContextExecutor = system.dispatcher
 
   val route =
-    path("hello"){
-     get{
-       complete(HttpEntity(ContentTypes.`text/html(UTF-8)`, "<h1>Say hello to akka-http</h1>"))
-     }
+    path("hello") {
+      get {
+        complete(HttpEntity(ContentTypes.`text/html(UTF-8)`, "<h1>Say hello to akka-http</h1>"))
+      }
     }
 
   val bindingFuture = Http().bindAndHandle(route, "localhost", 8080)
@@ -32,32 +31,4 @@ object WebServer extends App {
   bindingFuture
     .flatMap(_.unbind())
     .onComplete(_ => system.terminate())
-}
-*/
-
-
-import scala.concurrent.Future
-import scala.concurrent.ExecutionContext
-import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.duration._
-import scala.concurrent.Await
-import scala.util.{Failure, Success}
-
-object FuturesExample extends App {
-
-    val f = Future {
-      // Doing some job
-    }
-
-    val f1 = Future {
-      // Doing some job
-    }
-
-    f.onComplete {
-      case Success(value) => println(">>>>>>>>>>>>>>>>>>>>>>>>>>Done")
-      case Failure(e) =>
-        println("==========================================")
-        e.printStackTrace
-    }
-
 }
