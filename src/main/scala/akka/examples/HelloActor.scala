@@ -1,8 +1,8 @@
 package akka.examples
 
-import akka.actor.{Actor, ActorSystem, Props}
+import akka.actor.{Actor, ActorLogging, ActorSystem, Props}
 
-class HelloActor(val name: String) extends Actor {
+class HelloActor(val name: String) extends Actor with ActorLogging {
 
   override def receive: Receive = {
     case "hello" => println(s"Hello $name")
