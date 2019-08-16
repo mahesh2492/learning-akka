@@ -23,7 +23,7 @@ class ParentWatch extends Actor {
 
 object DeathWatchExample extends App {
   val system = ActorSystem("DeathWatchExample")
-  val parentWatch = system.actorOf(Props[ParentWatch], name = "ParentWatch")
+  val parentWatch = system.actorOf(Props[ParentWatch], name = "parent-watching-actor")
 
   parentWatch ! "Hello"
 

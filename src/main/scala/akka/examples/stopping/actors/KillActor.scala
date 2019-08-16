@@ -14,8 +14,8 @@ class KillActor extends Actor {
 }
 
 object KillActorTest extends App {
-  val system = ActorSystem("KillActor")
-  val killActor = system.actorOf(Props[KillActor], name = "KillActorTest")
+  val system = ActorSystem("KillActorTest")
+  val killActor = system.actorOf(Props[KillActor], name = "kill-actor-test")
 
   killActor ! "Hello! I am gonna kill you"
 

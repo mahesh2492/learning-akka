@@ -12,7 +12,7 @@ class StopActor extends Actor {
 object StopActorTest extends App {
 
   val system = ActorSystem("StoppingActor")
-  val actor = system.actorOf(Props[StopActor], name = "KillActor")
+  val actor = system.actorOf(Props[StopActor], name = "kill-actor")
 
   actor ! "hello"
 

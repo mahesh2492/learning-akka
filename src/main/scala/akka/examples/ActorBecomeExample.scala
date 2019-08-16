@@ -35,7 +35,7 @@ class ActorBecomeExample extends Actor {
 
 object ActorBecomeExampleTest extends App {
   val system = ActorSystem("ActorBecomeExampleTest")
-  val actor = system.actorOf(Props[ActorBecomeExample], name = "ActorBecomeExample")
+  val actor = system.actorOf(Props[ActorBecomeExample], name = "actor-become-example")
 
   actor ! ActorNormalMessage
   actor ! TryToFindSolution

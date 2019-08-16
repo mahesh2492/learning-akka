@@ -14,7 +14,7 @@ class PoisonedActor extends Actor {
 
 object PoisonPillActor extends App {
   val system = ActorSystem("PoisonedActor")
-  val poisonActor = system.actorOf(Props[PoisonedActor], name = "PoisonPillActor")
+  val poisonActor = system.actorOf(Props[PoisonedActor], name = "poison-pill")
 
   poisonActor ! "before poison pill"
 
