@@ -1,27 +1,27 @@
 package akka.examples.dispatcher
 
-import akka.actor.{Actor, ActorSystem, Props}
+import akka.actor.{Actor, ActorLogging, ActorSystem, Props}
 
 import scala.concurrent.{ExecutionContext, Future}
 
-class BlockingFutureActor extends Actor {
+class BlockingFutureActor extends Actor with ActorLogging {
 
   implicit val executionContext: ExecutionContext = context.dispatcher
 
   override def receive: Receive = {
     case i: Int =>
-      println(s"Calling blocking future: $i")
+      log.info(s"Calling blocking future: $i")
       Future {
         Thread.sleep(5000)
-        println(s"Blocking future finished $i")
+        log.info(s"Blocking future finished $i")
       }
   }
 }
 
-class PrintActor extends Actor {
+class PrintActor extends Actor with ActorLogging {
   def receive: PartialFunction[Any, Unit] = {
     case i: Int =>
-      println(s"PrintActor: $i")
+      log.info(s"PrintActor: $i")
   }
 }
 
@@ -37,5 +37,4 @@ object BlockingExample extends App {
     actor2 ! i
   }
 
-  system.terminate()
 }

@@ -1,8 +1,8 @@
 package akka.examples.actorpath
 
-import akka.actor.{Actor, ActorIdentity, ActorRef, ActorSelection}
+import akka.actor.{Actor, ActorIdentity, ActorLogging, ActorRef, ActorSelection}
 
-class Watcher extends Actor {
+class Watcher extends Actor with ActorLogging {
 
   var counterRef: ActorRef = _
 
@@ -12,9 +12,9 @@ class Watcher extends Actor {
 
   override def receive: Receive = {
     case ActorIdentity(_, Some(ref)) =>
-      println(s"Actor Reference for counter is $ref")
+      log.info(s"Actor Reference for counter is $ref")
     case ActorIdentity(_, None)      =>
-      println(s"Actor Reference for counter does not live :(")
+      log.info(s"Actor Reference for counter does not live :(")
   }
 
 }
