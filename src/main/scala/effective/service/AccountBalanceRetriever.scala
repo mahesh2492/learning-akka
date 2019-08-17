@@ -6,7 +6,7 @@ import effective._
 
 import scala.concurrent.duration._
 
-object AccountBalanceRetrieverFinal {
+object AccountBalanceRetriever {
 
   case object AccountRetrievalTimeout
 
@@ -16,16 +16,17 @@ class AccountBalanceRetriever(savingsAccounts: ActorRef,
                               checkingAccounts: ActorRef,
                               moneyMarketAccounts: ActorRef) extends Actor with ActorLogging {
 
-  import AccountBalanceRetrieverFinal._
-
-  var checkingBalances, savingsBalances, mmBalances: Option[List[(Long, BigDecimal)]] = None
+  import AccountBalanceRetriever._
 
   def receive: PartialFunction[Any, Unit] = {
-    case GetCustomerAccountBalances(id) => {
+    case GetCustomerAccountBalances(id) =>
       log.debug(s"Received GetCustomerAccountBalances for Id: $id from $sender")
-      val originalSender = sender()
+      val originalSender = sender
+
       context.actorOf(Props(new Actor {
-        override def receive: Receive = LoggingReceive {
+        var checkingBalances, savingsBalances, mmBalances: Option[List[(Long, BigDecimal)]] = None
+
+        def receive: Receive = LoggingReceive {
           case CheckingAccountBalances(balances)    =>
             log.debug(s"Received checking account balances: $balances")
             checkingBalances = balances
@@ -36,20 +37,20 @@ class AccountBalanceRetriever(savingsAccounts: ActorRef,
             collectBalances
           case MoneyMarketAccountBalances(balances) =>
             log.debug(s"Received Money Market balances: $balances")
+            println(s"Received Money Market balances??????????: $balances")
             mmBalances = balances
             collectBalances
           case AccountRetrievalTimeout              =>
             sendResponseAndShutdown(AccountRetrievalTimeout)
         }
 
-        def collectBalances: Unit =
-          (checkingBalances, savingsBalances, mmBalances) match {
-            case (Some(_), Some(_), Some(_)) =>
-              log.debug("Value received for all three account types")
-              timeoutMessager.cancel()
-              sendResponseAndShutdown(AccountBalances(checkingBalances, savingsBalances, mmBalances))
-            case _ =>
-          }
+        def collectBalances: Unit = (checkingBalances, savingsBalances, mmBalances) match {
+          case (Some(_), Some(_), Some(_)) =>
+            log.debug("Value received for all three account types")
+            timeoutMessager.cancel()
+            sendResponseAndShutdown(AccountBalances(checkingBalances, savingsBalances, mmBalances))
+          case _                           =>
+        }
 
         def sendResponseAndShutdown(response: Any): Unit = {
           originalSender ! response
@@ -63,12 +64,8 @@ class AccountBalanceRetriever(savingsAccounts: ActorRef,
 
         import context.dispatcher
 
-        val timeoutMessager: Cancellable = context.system.scheduler.scheduleOnce(250 milliseconds) {
-          self ! AccountRetrievalTimeout
-        }
+        val timeoutMessager: Cancellable = context.system.scheduler.scheduleOnce(250 milliseconds, self, AccountRetrievalTimeout)
       }))
-
-    }
 
   }
 }
