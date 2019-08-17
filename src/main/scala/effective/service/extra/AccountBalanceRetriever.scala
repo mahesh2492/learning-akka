@@ -1,4 +1,4 @@
-package effective.service
+package effective.service.extra
 
 import akka.actor.{Actor, ActorLogging, ActorRef, Cancellable, Props}
 import akka.event.LoggingReceive

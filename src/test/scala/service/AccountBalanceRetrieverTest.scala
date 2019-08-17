@@ -2,8 +2,8 @@ package service
 
 import akka.actor.{ActorRef, ActorSystem, Props}
 import akka.testkit.{ImplicitSender, TestKit, TestProbe}
-import effective.service.AccountBalanceRetriever
-import effective.service.AccountBalanceRetriever.AccountRetrievalTimeout
+import effective.service.extra.AccountBalanceRetriever.AccountRetrievalTimeout
+import effective.service.extra.AccountBalanceRetriever
 import effective.{AccountBalances, GetCustomerAccountBalances}
 import org.scalatest.{BeforeAndAfterAll, Matchers, Outcome, fixture}
 import stubs.{CheckingAccountsProxyStub, MoneyMarketAccountsProxyStub, SavingsAccountsProxyStub, TimingOutSavingsAccountProxyStub}
