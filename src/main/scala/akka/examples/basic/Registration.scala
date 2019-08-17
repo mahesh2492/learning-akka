@@ -1,10 +1,10 @@
-package akka.examples
+package akka.examples.basic
 
 import akka.actor.{Actor, ActorRef, ActorSystem, Props}
-import akka.examples.Checker.{BlackUser, CheckUser, WhiteUser}
+import akka.examples.basic.Checker.{BlackUser, CheckUser, WhiteUser}
+import akka.examples.basic.Recorder.NewUser
+import akka.examples.basic.Storage.AddUser
 import akka.pattern.ask
-import akka.examples.Recorder.NewUser
-import akka.examples.Storage.AddUser
 import akka.util.Timeout
 
 import scala.concurrent.duration._

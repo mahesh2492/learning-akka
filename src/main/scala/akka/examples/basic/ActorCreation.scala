@@ -1,8 +1,8 @@
-package akka.examples
+package akka.examples.basic
 
 import akka.actor.{Actor, ActorSystem, Props}
-import akka.examples.MusicController.{Play, Stop}
-import akka.examples.MusicPlayer.{StartMusic, StopMusic}
+import akka.examples.basic.MusicController.{Play, Stop}
+import akka.examples.basic.MusicPlayer.{StartMusic, StopMusic}
 
 // Music controller messages
 object MusicController {
