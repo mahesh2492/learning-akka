@@ -3,7 +3,7 @@ package akka.examples.routing
 import akka.actor.{Actor, ActorRef, Props}
 import akka.examples.routing.Worker.Work
 
-class Master extends Actor {
+class MasterPool extends Actor {
 
   var routees: List[ActorRef] = _
 
