@@ -18,8 +18,9 @@ object KillActorTest extends App {
   val killActor = system.actorOf(Props[KillActor], name = "kill-actor-test")
 
   killActor ! "Hello! I am gonna kill you"
-
-   killActor ! Kill
-
+  killActor ! "Going to shoot the actor"
+  killActor ! Kill
+  killActor ! "Hey Actor! are you there?"
   system.terminate()
+
 }

@@ -18,6 +18,8 @@ object StopActorTest extends App {
 
   //We can kill this method to stop the actor
   system.stop(actor)
-  println("An actor has been killed")
+  println("An actor has been killed so next message will not be printed")
+  actor ! "Go to dead letter"
+
   system.terminate()
 }

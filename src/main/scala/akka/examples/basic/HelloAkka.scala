@@ -23,7 +23,7 @@ object HelloAkka extends App {
   val greeter: ActorRef = system.actorOf(Props[Greeter], "greeter")
 
   //send WhoToGreet message to actor
-  greeter ! WhoToGreet("Akka")
+  greeter ! WhoToGreet("Mahesh")
 
   //shutdown the actor system
   system.terminate()
