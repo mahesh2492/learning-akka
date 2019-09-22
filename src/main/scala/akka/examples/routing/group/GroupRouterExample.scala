@@ -1,7 +1,8 @@
-package akka.examples.routing
+package akka.examples.routing.group
 
 import akka.actor.{ActorSystem, Props}
-import akka.examples.routing.Worker.Work
+import akka.examples.routing.pool.PoolRouter.Work
+import akka.examples.routing.pool.random.Worker
 
 object GroupRouterExample extends App {
 
@@ -13,6 +14,7 @@ object GroupRouterExample extends App {
       "/user/w4",
       "/user/w5",
     )
+
   val system = ActorSystem("group-router-example")
 
   system.actorOf(Props[Worker], name = "w1")

@@ -22,7 +22,5 @@ object ActorPathExample extends App {
   val counterSelection2 = system.actorSelection("counter")
   println(s"Actor Selection for counter: $counterSelection2")
 
-
-
   system.terminate()
 }

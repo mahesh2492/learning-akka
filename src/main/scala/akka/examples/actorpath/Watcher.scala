@@ -1,6 +1,6 @@
 package akka.examples.actorpath
 
-import akka.actor.{Actor, ActorIdentity, ActorLogging, ActorRef, ActorSelection}
+import akka.actor.{Actor, ActorIdentity, ActorLogging, ActorRef, ActorSelection, Identify}
 
 class Watcher extends Actor with ActorLogging {
 
@@ -8,7 +8,7 @@ class Watcher extends Actor with ActorLogging {
 
   val selection: ActorSelection = context.actorSelection("/user/counter")
 
-  selection ! None
+  selection ! Identify(None)
 
   override def receive: Receive = {
     case ActorIdentity(_, Some(ref)) =>

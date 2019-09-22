@@ -1,9 +1,14 @@
-package akka.examples.routing
+package akka.examples.routing.pool
 
 import akka.actor.{Actor, ActorRef, Props}
-import akka.examples.routing.Worker.Work
+import akka.examples.routing.pool.PoolRouter.Work
+import akka.examples.routing.pool.random.Worker
 
-class MasterPool extends Actor {
+object PoolRouter {
+  case class Work()
+}
+
+class PoolRouter extends Actor {
 
   var routees: List[ActorRef] = _
 
