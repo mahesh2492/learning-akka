@@ -56,7 +56,7 @@ class Hera extends Actor {
 
   override def preStart(): Unit = {
     childActor = context.actorOf(Props[Aphrodite], name = "aphrodite")
-   Thread.sleep(100)
+    Thread.sleep(100)
   }
 
   override def receive: Receive = {
@@ -73,7 +73,7 @@ object Supervision extends App {
   val hera = system.actorOf(Props[Hera], name = "hera")
 
   hera ! "Resume"
- Thread.sleep(1000)
+  Thread.sleep(1000)
 
   hera ! "Restart"
   Thread.sleep(1000)

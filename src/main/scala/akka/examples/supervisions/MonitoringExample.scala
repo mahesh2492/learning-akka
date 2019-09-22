@@ -4,9 +4,12 @@ import akka.actor.{Actor, ActorRef, ActorSystem, Props, Terminated}
 
 class Ares(athena: ActorRef) extends Actor {
 
-  override def preStart(): Unit = println("Ares: preStart...")
+  override def preStart(): Unit =  {
+    context.watch(athena)
+    println("Ares: preStart...")
+  }
 
-  override def postStop(): Unit = println("Ares: postStart...")
+  override def postStop(): Unit = println("Ares: postStop...")
 
   override def receive: PartialFunction[Any, Unit] = {
     case Terminated(_) =>
@@ -16,6 +19,7 @@ class Ares(athena: ActorRef) extends Actor {
 }
 
 class Athena extends Actor {
+
   override def receive: PartialFunction[Any, Unit] = {
     case message =>
       println(s"Athena received $message")
@@ -31,5 +35,6 @@ object MonitoringExample extends App {
 
   athena ! "Hi"
 
+  Thread.sleep(1000)
   system.terminate()
 }
