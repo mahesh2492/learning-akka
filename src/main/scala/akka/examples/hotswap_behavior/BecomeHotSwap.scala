@@ -1,7 +1,7 @@
-package akka.examples
+package akka.examples.hotswap_behavior
 
 import akka.actor.{Actor, ActorSystem, Props, Stash}
-import akka.examples.UserStorage.{Connect, DbOperation, Disconnect, Operation}
+import akka.examples.hotswap_behavior.UserStorage.{Connect, DbOperation, Disconnect, Operation}
 
 case class User(name: String, email: String)
 
