@@ -1,8 +1,8 @@
 package akka.examples.routing.group
 
 import akka.actor.{ActorSystem, Props}
+import akka.examples.routing.common.Worker
 import akka.examples.routing.pool.PoolRouter.Work
-import akka.examples.routing.pool.random.Worker
 
 object GroupRouterExample extends App {
 

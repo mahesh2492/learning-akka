@@ -1,7 +1,7 @@
-package akka.examples.routing.pool.random
+package akka.examples.routing.common
 
 import akka.actor.Actor
-import akka.examples.routing.pool.random.Worker.Work
+import akka.examples.routing.common.Worker.Work
 
 object Worker {
 

@@ -1,8 +1,8 @@
 package akka.examples.routing.pool
 
 import akka.actor.{Actor, ActorRef, Props}
+import akka.examples.routing.common.Worker
 import akka.examples.routing.pool.PoolRouter.Work
-import akka.examples.routing.pool.random.Worker
 
 object PoolRouter {
   case class Work()

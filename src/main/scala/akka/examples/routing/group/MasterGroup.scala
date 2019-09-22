@@ -1,7 +1,7 @@
 package akka.examples.routing.group
 
 import akka.actor.Actor
-import akka.examples.routing.pool.random.Worker.Work
+import akka.examples.routing.common.Worker.Work
 
 class MasterGroup(routerGroup: List[String]) extends Actor {
 
